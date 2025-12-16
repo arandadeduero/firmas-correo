@@ -469,6 +469,9 @@
               La firma aparecerá aquí...
             </p>
           </div>
+          <button class="btn copy-btn" onclick="copyPreviewToClipboard()">
+            📋 Copiar Vista Previa (Con Formato)
+          </button>
 
           <h2 class="section-title">Código HTML</h2>
           <textarea
@@ -714,24 +717,24 @@
           !position.startsWith("Alcald") && !position.startsWith("Concejal");
 
         // Generate HTML signature
-        const signatureHTML = `
+        const signatureHTML = `-- 
 <table style="font-family: 'Outfit', sans-serif; font-size: 14px; color: #333; border-collapse: collapse;">
     <tr>
         <td style="padding: 10px; padding-left: 0; vertical-align: top;">
             <div style="line-height: 1.6;">
-                <div style="font-weight: bold; font-size: 16px; color: #2c3e50; margin-bottom: 2px;">${name}</div>
-                <div style="color: #7f8c8d; font-size: 13px; margin-bottom: 2px;">${position}</div>
+                <div style="font-weight: bold; font-size: 16px; color: #000000; margin-bottom: 2px;">${name}</div>
+                <div style="color: #000000; font-size: 13px; margin-bottom: 2px;">${position}</div>
                 ${
                   showConcejalia
-                    ? `<div style="color: #0083c1; font-weight: 600; font-size: 13px; margin-bottom: 8px;">${concejaliaName}</div>`
+                    ? `<div style="color: #000000; font-weight: 600; font-size: 13px; margin-bottom: 8px;">${concejaliaName}</div>`
                     : ""
                 }
-                <div style="color: #555; font-size: 13px;">
-                    📧 <a href="mailto:${email}" style="color: #0083c1; text-decoration: none;">${email}</a>
+                <div style="color: #000000; font-size: 13px;">
+                    📧 <a href="mailto:${email}" style="color: #000000; text-decoration: none;">${email}</a>
                 </div>
                 ${
                   phone
-                    ? `<div style="color: #555; font-size: 13px;">📱 ${phone}</div>`
+                    ? `<div style="color: #000000; font-size: 13px;">📱 ${phone}</div>`
                     : ""
                 }
             </div>
@@ -777,6 +780,43 @@
           }, 2000);
         } catch (err) {
           alert("Error al copiar. Por favor, copia manualmente el texto.");
+        }
+      }
+
+      function copyPreviewToClipboard() {
+        const previewBox = document.getElementById("preview");
+
+        if (
+          !previewBox.innerHTML ||
+          previewBox.innerHTML.includes("La firma aparecerá")
+        ) {
+          alert("Primero genera una firma antes de copiar.");
+          return;
+        }
+
+        try {
+          const range = document.createRange();
+          range.selectNodeContents(previewBox);
+          const selection = window.getSelection();
+          selection.removeAllRanges();
+          selection.addRange(range);
+          document.execCommand("copy");
+          selection.removeAllRanges();
+
+          // Change button text temporarily
+          const btn = event.target;
+          const originalText = btn.textContent;
+          btn.textContent = "✓ ¡Copiado!";
+          btn.style.background = "#059669";
+
+          setTimeout(() => {
+            btn.textContent = originalText;
+            btn.style.background = "";
+          }, 2000);
+        } catch (err) {
+          alert(
+            "Error al copiar. Por favor, copia manualmente desde la vista previa."
+          );
         }
       }
 
