@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generador de Firmas de Correo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Outfit", sans-serif;
+        background: linear-gradient(135deg, #0083c1 0%, #e9f4f9 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #0083c1 0%, #e9f4f9 100%);
+        color: white;
+        padding: 30px;
+        text-align: center;
+      }
+
+      .logo-header {
+        background: white;
+        padding: 20px;
+        text-align: center;
+        border-bottom: 3px solid #0083c1;
+      }
+
+      .logo-header img {
+        max-width: 250px;
+        height: auto;
+      }
+
+      .footer {
+        background: linear-gradient(135deg, #e9f4f9 0%, #0083c1 100%);
+        color: white;
+        padding: 20px;
+        text-align: center;
+        font-size: 0.9rem;
+      }
+
+      .footer a {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        transition: opacity 0.3s;
+      }
+
+      .footer a:hover {
+        opacity: 0.8;
+        text-decoration: underline;
+      }
+
+      .header h1 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        opacity: 0.9;
+      }
+
+      .content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        padding: 30px;
+      }
+
+      .form-section,
+      .preview-section {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      label {
+        font-weight: 600;
+        color: #333;
+        font-size: 0.95rem;
+      }
+
+      input,
+      select,
+      textarea {
+        padding: 12px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+        font-family: inherit;
+      }
+
+      input:focus,
+      select:focus,
+      textarea:focus {
+        outline: none;
+        border-color: #0083c1;
+      }
+
+      .btn {
+        background: #0083c1;
+        color: white;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(0, 131, 193, 0.4);
+      }
+
+      .btn:active {
+        transform: translateY(0);
+      }
+
+      .preview-box {
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 20px;
+        background: #f9f9f9;
+        min-height: 200px;
+      }
+
+      .code-box {
+        background: #2d2d2d;
+        color: #f8f8f2;
+        padding: 15px;
+        border-radius: 8px;
+        font-family: "Courier New", monospace;
+        font-size: 0.85rem;
+        max-height: 300px;
+        overflow-y: auto;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
+      textarea.code-textarea {
+        background: #2d2d2d;
+        color: #f8f8f2;
+        font-family: "Courier New", monospace;
+        font-size: 0.85rem;
+        min-height: 200px;
+        resize: vertical;
+      }
+
+      .section-title {
+        font-size: 1.3rem;
+        color: #333;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 3px solid #0083c1;
+      }
+
+      .copy-btn {
+        background: #a4541c;
+        margin-top: 10px;
+      }
+
+      .copy-btn:hover {
+        box-shadow: 0 5px 20px rgba(164, 84, 28, 0.4);
+      }
+
+      /* Email signature styles */
+      .email-signature {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      .email-signature table {
+        border-collapse: collapse;
+      }
+
+      .email-signature td {
+        padding: 5px;
+        vertical-align: middle;
+      }
+
+      .email-signature img {
+        display: block;
+        max-width: 80px;
+        height: auto;
+      }
+
+      .email-signature .name {
+        font-weight: bold;
+        font-size: 16px;
+        color: #2c3e50;
+      }
+
+      .email-signature .position {
+        color: #7f8c8d;
+        font-size: 13px;
+      }
+
+      .email-signature .concejalia {
+        color: #0083c1;
+        font-weight: 600;
+        font-size: 13px;
+      }
+
+      .email-signature .contact {
+        color: #555;
+        font-size: 13px;
+      }
+
+      .email-signature a {
+        color: #0083c1;
+        text-decoration: none;
+      }
+
+      @media (max-width: 768px) {
+        .content {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo-header">
+        <img
+          src="images/colores/ayuntamiento.jpg"
+          alt="Ayuntamiento de Aranda de Duero"
+        />
+      </div>
+      <div class="header">
+        <h1>📧 Generador de firmas de correo</h1>
+        <p>Ayuntamiento de Aranda de Duero</p>
+      </div>
+
+      <div class="content">
+        <!-- Form Section -->
+        <div class="form-section">
+          <h2 class="section-title">Datos laborales</h2>
+
+          <div class="form-group">
+            <label for="name">Nombre completo *</label>
+            <input
+              type="text"
+              id="name"
+              placeholder="Ej: Juan Pérez García"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="position">Puesto/Cargo *</label>
+            <input
+              type="text"
+              id="position"
+              placeholder="Ej: Concejal"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="concejalia">Concejalía *</label>
+            <select id="concejalia" required>
+              <option value="">Selecciona una concejalía...</option>
+              <option value="aguas">Aguas</option>
+              <option value="aguas-abastecimiento">
+                Aguas (Abastecimiento)
+              </option>
+              <option value="aguas-alcantarillado">
+                Aguas (Alcantarillado)
+              </option>
+              <option value="alcaldia">Alcaldía + Concejales</option>
+              <option value="barrios">Barrios</option>
+              <option value="comercio_y_consumo">Comercio y Consumo</option>
+              <option value="comunicacion">Comunicación</option>
+              <option value="contratacion">Contratación</option>
+              <option value="cultura">Cultura</option>
+              <option value="cultura-biblioteca">Cultura (Biblioteca)</option>
+              <option value="cultura-centros_civicos">
+                Cultura (Centros Cívicos)
+              </option>
+              <option value="cultura-cultura_general">
+                Cultura (Cultura General)
+              </option>
+              <option value="cultura-promocion_cultural">
+                Cultura (Promoción Cultural)
+              </option>
+              <option value="deportes">Deportes</option>
+              <option value="deportes-instalaciones_deportivas">
+                Deportes (Instalaciones Deportivas)
+              </option>
+              <option value="deportes-promocion_deportiva">
+                Deportes (Promoción Deportiva)
+              </option>
+              <option value="educacion">Educación</option>
+              <option value="educacion-escuela_de_musica">
+                Educación (Escuela de Música)
+              </option>
+              <option value="festejos">Festejos</option>
+              <option value="hermanamientos">Hermanamientos</option>
+              <option value="informatica">Informática</option>
+              <option value="informatica-innovacion">
+                Informática (Innovación)
+              </option>
+              <option value="informatica-innovacion_copia">
+                Informática (Innovación Copia)
+              </option>
+              <option value="intervencion">Intervención</option>
+              <option value="intervencion-contabilidad_y_gestion">
+                Intervención (Contabilidad y Gestión)
+              </option>
+              <option value="intervencion-fiscalizacion_y_control">
+                Intervención (Fiscalización y Control)
+              </option>
+              <option value="juventud">Juventud</option>
+              <option value="juventud-centro_de_arte_joven">
+                Juventud (Centro de Arte Joven)
+              </option>
+              <option value="juventud-escuela_de_folklore">
+                Juventud (Escuela de Folklore)
+              </option>
+              <option value="medio_ambiente">Medio Ambiente</option>
+              <option value="medio_ambiente-aseo_urbano">
+                Medio Ambiente (Aseo Urbano)
+              </option>
+              <option value="medio_ambiente-limpieza_viaria">
+                Medio Ambiente (Limpieza Viaria)
+              </option>
+              <option value="medio_ambiente-parques_y_jardines">
+                Medio Ambiente (Parques y Jardines)
+              </option>
+              <option value="medio_ambiente-recogida_de_residuos">
+                Medio Ambiente (Recogida de Residuos)
+              </option>
+              <option value="movilidad">Movilidad</option>
+              <option value="participacion_ciudadana">
+                Participación Ciudadana
+              </option>
+              <option value="personal">Personal</option>
+              <option value="promocion">Promoción</option>
+              <option value="regimen_interior">Régimen Interior</option>
+              <option value="secretaria_general">Secretaría General</option>
+              <option value="secretaria_general-archivo_y_documentacion">
+                Secretaría General (Archivo y Documentación)
+              </option>
+              <option value="secretaria_general-atencion_al_ciudadano">
+                Secretaría General (Atención al Ciudadano)
+              </option>
+              <option value="secretaria_general-contratacion">
+                Secretaría General (Contratación)
+              </option>
+              <option value="seguridad_ciudadana">Seguridad Ciudadana</option>
+              <option value="seguridad_ciudadana-bomberos">
+                Seguridad Ciudadana (Bomberos)
+              </option>
+              <option value="seguridad_ciudadana-policia">
+                Seguridad Ciudadana (Policía)
+              </option>
+              <option value="seguridad_ciudadana-proteccion_civil">
+                Seguridad Ciudadana (Protección Civil)
+              </option>
+              <option value="servicios">Servicios</option>
+              <option value="servicios_sociales">Servicios Sociales</option>
+              <option value="servicios_sociales-familia">
+                Servicios Sociales (Familia)
+              </option>
+              <option value="servicios_sociales-igualdad">
+                Servicios Sociales (Igualdad)
+              </option>
+              <option value="servicios_sociales-menor">
+                Servicios Sociales (Menor)
+              </option>
+              <option value="servicios_sociales-mujer">
+                Servicios Sociales (Mujer)
+              </option>
+              <option value="servicios_sociales-tercera_edad">
+                Servicios Sociales (Tercera Edad)
+              </option>
+              <option value="tesoreria">Tesorería</option>
+              <option value="tesoreria-direccion_financiera">
+                Tesorería (Dirección Financiera)
+              </option>
+              <option value="tesoreria-gestion_tributaria">
+                Tesorería (Gestión Tributaria)
+              </option>
+              <option value="tesoreria-inspeccion">
+                Tesorería (Inspección)
+              </option>
+              <option value="tesoreria-recaudacion">
+                Tesorería (Recaudación)
+              </option>
+              <option value="turismo">Turismo</option>
+              <option value="urbanismo">Urbanismo</option>
+              <option value="urbanismo-alumbrado_publico">
+                Urbanismo (Alumbrado Público)
+              </option>
+              <option value="urbanismo-aru_santa_catalina">
+                Urbanismo (ARU Santa Catalina)
+              </option>
+              <option value="urbanismo-cementerio">
+                Urbanismo (Cementerio)
+              </option>
+              <option value="urbanismo-vias_publicas">
+                Urbanismo (Vías Públicas)
+              </option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Correo electrónico *</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Ej: ejemplo@arandadeduero.es"
+              pattern=".*@arandadeduero\.es$"
+              title="El correo debe terminar en @arandadeduero.es"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Teléfono</label>
+            <input type="tel" id="phone" placeholder="Ej: +34 123 456 789" />
+          </div>
+
+          <button class="btn" onclick="generateSignature()">
+            Generar Firma
+          </button>
+        </div>
+
+        <!-- Preview Section -->
+        <div class="preview-section">
+          <h2 class="section-title">Vista Previa</h2>
+          <div class="preview-box" id="preview">
+            <p style="color: #999; text-align: center">
+              La firma aparecerá aquí...
+            </p>
+          </div>
+
+          <h2 class="section-title">Código HTML</h2>
+          <textarea
+            class="code-textarea"
+            id="htmlCode"
+            readonly
+            placeholder="El código HTML aparecerá aquí..."
+          ></textarea>
+          <button class="btn copy-btn" onclick="copyToClipboard()">
+            📋 Copiar Código HTML
+          </button>
+        </div>
+      </div>
+      <div class="footer">
+        <p>
+          © 2025 Ayuntamiento de Aranda de Duero |
+          <a
+            href="https://www.arandadeduero.es"
+            target="_blank"
+            rel="noopener noreferrer"
+            >www.arandadeduero.es</a
+          >
+        </p>
+      </div>
+    </div>
+
+    <script>
+      // Image mapping for each concejalía
+      const concejaliaImages = {
+        aguas: "images/blanco/aguas.jpg",
+        "aguas-abastecimiento": "images/blanco/aguas-abastecimiento.jpg",
+        "aguas-alcantarillado": "images/blanco/aguas-alcantarillado.jpg",
+        alcaldia: "images/colores/ayuntamiento.jpg",
+        barrios: "images/blanco/barrios.jpg",
+        comercio_y_consumo: "images/blanco/comercio_y_consumo.jpg",
+        comunicacion: "images/blanco/comunicacion.jpg",
+        contratacion: "images/blanco/contratacion.jpg",
+        cultura: "images/blanco/cultura.jpg",
+        "cultura-biblioteca": "images/blanco/cultura-biblioteca.jpg",
+        "cultura-centros_civicos": "images/blanco/cultura-centros_civicos.jpg",
+        "cultura-cultura_general": "images/blanco/cultura-cultura_general.jpg",
+        "cultura-promocion_cultural":
+          "images/blanco/cultura-promocion_cultural.jpg",
+        deportes: "images/blanco/deportes.jpg",
+        "deportes-instalaciones_deportivas":
+          "images/blanco/deportes-instalaciones_deportivas.jpg",
+        "deportes-promocion_deportiva":
+          "images/blanco/deportes-promocion_deportiva.jpg",
+        educacion: "images/blanco/educacion.jpg",
+        "educacion-escuela_de_musica":
+          "images/blanco/educacion-escuela_de_musica.jpg",
+        festejos: "images/blanco/festejos.jpg",
+        hermanamientos: "images/blanco/hermanamientos.jpg",
+        informatica: "images/blanco/informatica.jpg",
+        "informatica-innovacion": "images/blanco/informatica-innovacion.jpg",
+        "informatica-innovacion_copia":
+          "images/blanco/informatica-innovacion_copia.jpg",
+        intervencion: "images/blanco/intervencion.jpg",
+        "intervencion-contabilidad_y_gestion":
+          "images/blanco/intervencion-contabilidad_y_gestion.jpg",
+        "intervencion-fiscalizacion_y_control":
+          "images/blanco/intervencion-fiscalizacion_y_control.jpg",
+        juventud: "images/blanco/juventud.jpg",
+        "juventud-centro_de_arte_joven":
+          "images/blanco/juventud-centro_de_arte_joven.jpg",
+        "juventud-escuela_de_folklore":
+          "images/blanco/juventud-escuela_de_folklore.jpg",
+        medio_ambiente: "images/blanco/medio_ambiente.jpg",
+        "medio_ambiente-aseo_urbano":
+          "images/blanco/medio_ambiente-aseo_urbano.jpg",
+        "medio_ambiente-limpieza_viaria":
+          "images/blanco/medio_ambiente-limpieza_viaria.jpg",
+        "medio_ambiente-parques_y_jardines":
+          "images/blanco/medio_ambiente-parques_y_jardines.jpg",
+        "medio_ambiente-recogida_de_residuos":
+          "images/blanco/medio_ambiente-recogida_de_residuos.jpg",
+        movilidad: "images/blanco/movilidad.jpg",
+        participacion_ciudadana: "images/blanco/participacion_ciudadana.jpg",
+        personal: "images/blanco/personal.jpg",
+        promocion: "images/blanco/promocion.jpg",
+        regimen_interior: "images/blanco/regimen_interior.jpg",
+        secretaria_general: "images/blanco/secretaria_general.jpg",
+        "secretaria_general-archivo_y_documentacion":
+          "images/blanco/secretaria_general-archivo_y_documentacion.jpg",
+        "secretaria_general-atencion_al_ciudadano":
+          "images/blanco/secretaria_general-atencion_al_ciudadano.jpg",
+        "secretaria_general-contratacion":
+          "images/blanco/secretaria_general-contratacion.jpg",
+        seguridad_ciudadana: "images/blanco/seguridad_ciudadana.jpg",
+        "seguridad_ciudadana-bomberos":
+          "images/blanco/seguridad_ciudadana-bomberos.jpg",
+        "seguridad_ciudadana-policia":
+          "images/blanco/seguridad_ciudadana-policia.jpg",
+        "seguridad_ciudadana-proteccion_civil":
+          "images/blanco/seguridad_ciudadana-proteccion_civil.jpg",
+        servicios: "images/blanco/servicios.jpg",
+        servicios_sociales: "images/blanco/servicios_sociales.jpg",
+        "servicios_sociales-familia":
+          "images/blanco/servicios_sociales-familia.jpg",
+        "servicios_sociales-igualdad":
+          "images/blanco/servicios_sociales-igualdad.jpg",
+        "servicios_sociales-menor":
+          "images/blanco/servicios_sociales-menor.jpg",
+        "servicios_sociales-mujer":
+          "images/blanco/servicios_sociales-mujer.jpg",
+        "servicios_sociales-tercera_edad":
+          "images/blanco/servicios_sociales-tercera_edad.jpg",
+        tesoreria: "images/blanco/tesoreria.jpg",
+        "tesoreria-direccion_financiera":
+          "images/blanco/tesoreria-direccion_financiera.jpg",
+        "tesoreria-gestion_tributaria":
+          "images/blanco/tesoreria-gestion_tributaria.jpg",
+        "tesoreria-inspeccion": "images/blanco/tesoreria-inspeccion.jpg",
+        "tesoreria-recaudacion": "images/blanco/tesoreria-recaudacion.jpg",
+        turismo: "images/blanco/turismo.jpg",
+        urbanismo: "images/blanco/urbanismo.jpg",
+        "urbanismo-alumbrado_publico":
+          "images/blanco/urbanismo-alumbrado_publico.jpg",
+        "urbanismo-aru_santa_catalina":
+          "images/blanco/urbanismo-aru_santa_catalina.jpg",
+        "urbanismo-cementerio": "images/blanco/urbanismo-cementerio.jpg",
+        "urbanismo-vias_publicas": "images/blanco/urbanismo-vias_publicas.jpg",
+      };
+
+      // Display names for concejalías
+      const concejaliaNames = {
+        aguas: "Aguas",
+        "aguas-abastecimiento": "Aguas (Abastecimiento)",
+        "aguas-alcantarillado": "Aguas (Alcantarillado)",
+        alcaldia: "Alcaldía + Concejales",
+        barrios: "Barrios",
+        comercio_y_consumo: "Comercio y Consumo",
+        comunicacion: "Comunicación",
+        contratacion: "Contratación",
+        cultura: "Cultura",
+        "cultura-biblioteca": "Cultura (Biblioteca)",
+        "cultura-centros_civicos": "Cultura (Centros Cívicos)",
+        "cultura-cultura_general": "Cultura (Cultura General)",
+        "cultura-promocion_cultural": "Cultura (Promoción Cultural)",
+        deportes: "Deportes",
+        "deportes-instalaciones_deportivas":
+          "Deportes (Instalaciones Deportivas)",
+        "deportes-promocion_deportiva": "Deportes (Promoción Deportiva)",
+        educacion: "Educación",
+        "educacion-escuela_de_musica": "Educación (Escuela de Música)",
+        festejos: "Festejos",
+        hermanamientos: "Hermanamientos",
+        informatica: "Informática",
+        "informatica-innovacion": "Informática (Innovación)",
+        "informatica-innovacion_copia": "Informática (Innovación Copia)",
+        intervencion: "Intervención",
+        "intervencion-contabilidad_y_gestion":
+          "Intervención (Contabilidad y Gestión)",
+        "intervencion-fiscalizacion_y_control":
+          "Intervención (Fiscalización y Control)",
+        juventud: "Juventud",
+        "juventud-centro_de_arte_joven": "Juventud (Centro de Arte Joven)",
+        "juventud-escuela_de_folklore": "Juventud (Escuela de Folklore)",
+        medio_ambiente: "Medio Ambiente",
+        "medio_ambiente-aseo_urbano": "Medio Ambiente (Aseo Urbano)",
+        "medio_ambiente-limpieza_viaria": "Medio Ambiente (Limpieza Viaria)",
+        "medio_ambiente-parques_y_jardines":
+          "Medio Ambiente (Parques y Jardines)",
+        "medio_ambiente-recogida_de_residuos":
+          "Medio Ambiente (Recogida de Residuos)",
+        movilidad: "Movilidad",
+        participacion_ciudadana: "Participación Ciudadana",
+        personal: "Personal",
+        promocion: "Promoción",
+        regimen_interior: "Régimen Interior",
+        secretaria_general: "Secretaría General",
+        "secretaria_general-archivo_y_documentacion":
+          "Secretaría General (Archivo y Documentación)",
+        "secretaria_general-atencion_al_ciudadano":
+          "Secretaría General (Atención al Ciudadano)",
+        "secretaria_general-contratacion": "Secretaría General (Contratación)",
+        seguridad_ciudadana: "Seguridad Ciudadana",
+        "seguridad_ciudadana-bomberos": "Seguridad Ciudadana (Bomberos)",
+        "seguridad_ciudadana-policia": "Seguridad Ciudadana (Policía)",
+        "seguridad_ciudadana-proteccion_civil":
+          "Seguridad Ciudadana (Protección Civil)",
+        servicios: "Servicios",
+        servicios_sociales: "Servicios Sociales",
+        "servicios_sociales-familia": "Servicios Sociales (Familia)",
+        "servicios_sociales-igualdad": "Servicios Sociales (Igualdad)",
+        "servicios_sociales-menor": "Servicios Sociales (Menor)",
+        "servicios_sociales-mujer": "Servicios Sociales (Mujer)",
+        "servicios_sociales-tercera_edad": "Servicios Sociales (Tercera Edad)",
+        tesoreria: "Tesorería",
+        "tesoreria-direccion_financiera": "Tesorería (Dirección Financiera)",
+        "tesoreria-gestion_tributaria": "Tesorería (Gestión Tributaria)",
+        "tesoreria-inspeccion": "Tesorería (Inspección)",
+        "tesoreria-recaudacion": "Tesorería (Recaudación)",
+        turismo: "Turismo",
+        urbanismo: "Urbanismo",
+        "urbanismo-alumbrado_publico": "Urbanismo (Alumbrado Público)",
+        "urbanismo-aru_santa_catalina": "Urbanismo (ARU Santa Catalina)",
+        "urbanismo-cementerio": "Urbanismo (Cementerio)",
+        "urbanismo-vias_publicas": "Urbanismo (Vías Públicas)",
+      };
+
+      function generateSignature() {
+        const name = document.getElementById("name").value.trim();
+        const position = document.getElementById("position").value.trim();
+        const concejaliaKey = document.getElementById("concejalia").value;
+        const email = document.getElementById("email").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+
+        // If not all required fields are filled, show placeholder
+        if (!name || !position || !concejaliaKey || !email) {
+          document.getElementById(
+            "preview"
+          ).innerHTML = `<p style="color: #999; text-align: center">La firma aparecerá aquí cuando completes todos los campos obligatorios...</p>`;
+          document.getElementById("htmlCode").value = "";
+          return;
+        }
+
+        // Check email format
+        if (!email.endsWith("@arandadeduero.es")) {
+          document.getElementById(
+            "preview"
+          ).innerHTML = `<p style="color: #ce0e2d; text-align: center">⚠️ El correo electrónico debe terminar en @arandadeduero.es</p>`;
+          document.getElementById("htmlCode").value = "";
+          return;
+        }
+
+        const concejaliaName = `Concejalía de ${concejaliaNames[concejaliaKey]}`;
+        const imageUrl = concejaliaImages[concejaliaKey];
+
+        // Check if position starts with "Alcald" or "Concejal" to hide concejalía line
+        const showConcejalia =
+          !position.startsWith("Alcald") && !position.startsWith("Concejal");
+
+        // Generate HTML signature
+        const signatureHTML = `
+<table style="font-family: 'Outfit', sans-serif; font-size: 14px; color: #333; border-collapse: collapse;">
+    <tr>
+        <td style="padding: 10px; padding-left: 0; vertical-align: top;">
+            <div style="line-height: 1.6;">
+                <div style="font-weight: bold; font-size: 16px; color: #2c3e50; margin-bottom: 2px;">${name}</div>
+                <div style="color: #7f8c8d; font-size: 13px; margin-bottom: 2px;">${position}</div>
+                ${
+                  showConcejalia
+                    ? `<div style="color: #0083c1; font-weight: 600; font-size: 13px; margin-bottom: 8px;">${concejaliaName}</div>`
+                    : ""
+                }
+                <div style="color: #555; font-size: 13px;">
+                    📧 <a href="mailto:${email}" style="color: #0083c1; text-decoration: none;">${email}</a>
+                </div>
+                ${
+                  phone
+                    ? `<div style="color: #555; font-size: 13px;">📱 ${phone}</div>`
+                    : ""
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 10px; padding-left: 0; padding-top: 15px;">
+            <img src="${imageUrl}" alt="${concejaliaName}" style="display: block; max-width: 300px; height: auto; border-radius: 8px;">
+        </td>
+    </tr>
+</table>`.trim();
+
+        // Update preview
+        document.getElementById("preview").innerHTML = signatureHTML;
+
+        // Update code textarea
+        document.getElementById("htmlCode").value = signatureHTML;
+      }
+
+      function copyToClipboard() {
+        const codeTextarea = document.getElementById("htmlCode");
+
+        if (!codeTextarea.value) {
+          alert("Primero genera una firma antes de copiar el código.");
+          return;
+        }
+
+        codeTextarea.select();
+        codeTextarea.setSelectionRange(0, 99999); // For mobile devices
+
+        try {
+          document.execCommand("copy");
+
+          // Change button text temporarily
+          const btn = event.target;
+          const originalText = btn.textContent;
+          btn.textContent = "✓ ¡Copiado!";
+          btn.style.background = "#059669";
+
+          setTimeout(() => {
+            btn.textContent = originalText;
+            btn.style.background = "";
+          }, 2000);
+        } catch (err) {
+          alert("Error al copiar. Por favor, copia manualmente el texto.");
+        }
+      }
+
+      // Save form data to localStorage
+      function saveFormData() {
+        const formData = {
+          name: document.getElementById("name").value,
+          position: document.getElementById("position").value,
+          concejalia: document.getElementById("concejalia").value,
+          email: document.getElementById("email").value,
+          phone: document.getElementById("phone").value,
+        };
+        localStorage.setItem("firmaCorreoData", JSON.stringify(formData));
+      }
+
+      // Load form data from localStorage
+      function loadFormData() {
+        const savedData = localStorage.getItem("firmaCorreoData");
+        if (savedData) {
+          try {
+            const formData = JSON.parse(savedData);
+            document.getElementById("name").value = formData.name || "";
+            document.getElementById("position").value = formData.position || "";
+            document.getElementById("concejalia").value =
+              formData.concejalia || "";
+            document.getElementById("email").value = formData.email || "";
+            document.getElementById("phone").value = formData.phone || "";
+
+            // Generate signature with loaded data
+            generateSignature();
+          } catch (e) {
+            console.error("Error loading saved form data:", e);
+          }
+        }
+      }
+
+      // Generate signature on Enter key and on any input change (live preview)
+      document.querySelectorAll("input, select").forEach((element) => {
+        // Live preview on input/change
+        element.addEventListener("input", function () {
+          saveFormData();
+          generateSignature();
+        });
+        element.addEventListener("change", function () {
+          saveFormData();
+          generateSignature();
+        });
+
+        // Also on Enter key
+        element.addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            generateSignature();
+          }
+        });
+      });
+
+      // Load saved form data when page loads
+      window.addEventListener("DOMContentLoaded", loadFormData);
+    </script>
+  </body>
+</html>
