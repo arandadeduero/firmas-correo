@@ -706,7 +706,9 @@
 
         // Check if position starts with "Alcald" or "Concejal" to hide concejalía line
         const showConcejalia =
-          !position.startsWith("Alcald") && !position.startsWith("Concejal");
+          !position.startsWith("Alcald") &&
+          !position.startsWith("Concejal") &&
+          concejaliaKey !== "alcaldia";
 
         // Generate HTML signature
         const signatureHTML = `
