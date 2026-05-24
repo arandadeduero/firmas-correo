@@ -33,13 +33,7 @@
         overflow: hidden;
       }
 
-      .header {
-        background: linear-gradient(135deg, #0083c1 0%, #e9f4f9 100%);
-        color: white;
-        padding: 30px;
-        text-align: center;
-      }
-
+      /* ── Header ── */
       .logo-header {
         background: white;
         padding: 20px;
@@ -52,28 +46,11 @@
         height: auto;
       }
 
-      .footer {
-        background: linear-gradient(135deg, #e9f4f9 0%, #0083c1 100%);
+      .header {
+        background: linear-gradient(135deg, #0083c1 0%, #e9f4f9 100%);
         color: white;
-        padding: 20px;
+        padding: 30px;
         text-align: center;
-        font-size: 0.9rem;
-      }
-
-      .footer p {
-        margin: 0;
-      }
-
-      .footer a {
-        color: white;
-        text-decoration: none;
-        font-weight: 600;
-        transition: opacity 0.3s;
-      }
-
-      .footer a:hover {
-        opacity: 0.8;
-        text-decoration: underline;
       }
 
       .header h1 {
@@ -85,6 +62,7 @@
         opacity: 0.9;
       }
 
+      /* ── Layout ── */
       .content {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -99,6 +77,7 @@
         gap: 20px;
       }
 
+      /* ── Form controls ── */
       .form-group {
         display: flex;
         flex-direction: column;
@@ -129,6 +108,7 @@
         border-color: #0083c1;
       }
 
+      /* ── Buttons ── */
       .btn {
         background: #0083c1;
         color: white;
@@ -152,25 +132,30 @@
         transform: translateY(0);
       }
 
+      .btn--copy {
+        background: #a4541c;
+        margin-top: 10px;
+      }
+
+      .btn--copy:hover {
+        box-shadow: 0 5px 20px rgba(164, 84, 28, 0.4);
+      }
+
+      /* ── Preview / code boxes ── */
+      .section-title {
+        font-size: 1.3rem;
+        color: #333;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 3px solid #0083c1;
+      }
+
       .preview-box {
         border: 2px solid #e0e0e0;
         border-radius: 8px;
         padding: 20px;
         background: #f9f9f9;
         min-height: 200px;
-      }
-
-      .code-box {
-        background: #2d2d2d;
-        color: #f8f8f2;
-        padding: 15px;
-        border-radius: 8px;
-        font-family: "Courier New", monospace;
-        font-size: 0.85rem;
-        max-height: 300px;
-        overflow-y: auto;
-        white-space: pre-wrap;
-        word-wrap: break-word;
       }
 
       textarea.code-textarea {
@@ -182,24 +167,7 @@
         resize: vertical;
       }
 
-      .section-title {
-        font-size: 1.3rem;
-        color: #333;
-        margin-bottom: 10px;
-        padding-bottom: 10px;
-        border-bottom: 3px solid #0083c1;
-      }
-
-      .copy-btn {
-        background: #a4541c;
-        margin-top: 10px;
-      }
-
-      .copy-btn:hover {
-        box-shadow: 0 5px 20px rgba(164, 84, 28, 0.4);
-      }
-
-      /* Email signature styles */
+      /* ── Email signature (used inside preview) ── */
       .email-signature {
         font-family: Arial, sans-serif;
         font-size: 14px;
@@ -249,6 +217,38 @@
         text-decoration: none;
       }
 
+      /* ── Footer ── */
+      .footer {
+        background: linear-gradient(135deg, #e9f4f9 0%, #0083c1 100%);
+        color: white;
+        padding: 20px;
+        text-align: center;
+        font-size: 0.9rem;
+      }
+
+      .footer p {
+        margin: 0;
+      }
+
+      .footer p + p {
+        margin-top: 10px;
+        font-size: 0.8rem;
+        line-height: 1.4;
+      }
+
+      .footer a {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        transition: opacity 0.3s;
+      }
+
+      .footer a:hover {
+        opacity: 0.8;
+        text-decoration: underline;
+      }
+
+      /* ── Responsive ── */
       @media (max-width: 768px) {
         .content {
           grid-template-columns: 1fr;
@@ -264,8 +264,9 @@
           alt="Ayuntamiento de Aranda de Duero"
         />
       </div>
+
       <div class="header">
-        <h1>📧 Generador de firmas de correo</h1>
+        <h1>Generador de firmas de correo</h1>
       </div>
 
       <div class="content">
@@ -297,143 +298,6 @@
             <label for="concejalia">Concejalía *</label>
             <select id="concejalia" required>
               <option value="">Selecciona una concejalía...</option>
-              <option value="aguas">Aguas</option>
-              <option value="aguas-abastecimiento">
-                Aguas (Abastecimiento)
-              </option>
-              <option value="aguas-alcantarillado">
-                Aguas (Alcantarillado)
-              </option>
-              <option value="alcaldia">Alcaldía + Concejales</option>
-              <option value="barrios">Barrios</option>
-              <option value="comercio_y_consumo">Comercio y Consumo</option>
-              <option value="comunicacion">Comunicación</option>
-              <option value="contratacion">Contratación</option>
-              <option value="cultura">Cultura</option>
-              <option value="cultura-biblioteca">Cultura (Biblioteca)</option>
-              <option value="cultura-centros_civicos">
-                Cultura (Centros Cívicos)
-              </option>
-              <option value="cultura-cultura_general">
-                Cultura (Cultura General)
-              </option>
-              <option value="cultura-promocion_cultural">
-                Cultura (Promoción Cultural)
-              </option>
-              <option value="deportes">Deportes</option>
-              <option value="deportes-instalaciones_deportivas">
-                Deportes (Instalaciones Deportivas)
-              </option>
-              <option value="deportes-promocion_deportiva">
-                Deportes (Promoción Deportiva)
-              </option>
-              <option value="educacion">Educación</option>
-              <option value="educacion-escuela_de_musica">
-                Educación (Escuela de Música)
-              </option>
-              <option value="festejos">Festejos</option>
-              <option value="hermanamientos">Hermanamientos</option>
-              <option value="hacienda">Hacienda</option>
-              <option value="hacienda-intervencion-contabilidad_y_gestion">
-                Hacienda - Intervención (Contabilidad y Gestión)
-              </option>
-              <option value="hacienda-intervencion-fiscalizacion_y_control">
-                Hacienda - Intervención (Fiscalización y Control)
-              </option>
-              <option value="hacienda-tesoreria">Hacienda - Tesorería</option>
-              <option value="hacienda-tesoreria-direccion_financiera">
-                Hacienda - Tesorería (Dirección Financiera)
-              </option>
-              <option value="hacienda-tesoreria-gestion_tributaria">
-                Hacienda - Tesorería (Gestión Tributaria)
-              </option>
-              <option value="hacienda-tesoreria-inspeccion">
-                Hacienda - Tesorería (Inspección)
-              </option>
-              <option value="hacienda-tesoreria-recaudacion">
-                Hacienda - Tesorería (Recaudación)
-              </option>
-              <option value="informatica">Informática</option>
-              <option value="innovacion">Innovación</option>
-              <option value="intervencion">Intervención</option>
-              <option value="juventud">Juventud</option>
-              <option value="juventud-centro_de_arte_joven">
-                Juventud (Centro de Arte Joven)
-              </option>
-              <option value="juventud-escuela_de_folklore">
-                Juventud (Escuela de Folklore)
-              </option>
-              <option value="medio_ambiente">Medio Ambiente</option>
-              <option value="medio_ambiente-aseo_urbano">
-                Medio Ambiente (Aseo Urbano)
-              </option>
-              <option value="medio_ambiente-limpieza_viaria">
-                Medio Ambiente (Limpieza Viaria)
-              </option>
-              <option value="medio_ambiente-parques_y_jardines">
-                Medio Ambiente (Parques y Jardines)
-              </option>
-              <option value="medio_ambiente-recogida_de_residuos">
-                Medio Ambiente (Recogida de Residuos)
-              </option>
-              <option value="movilidad">Movilidad</option>
-              <option value="participacion_ciudadana">
-                Participación Ciudadana
-              </option>
-              <option value="personal">Personal</option>
-              <option value="promocion">Promoción</option>
-              <option value="regimen_interior">Régimen Interior</option>
-              <option value="secretaria_general">Secretaría General</option>
-              <option value="secretaria_general-archivo_y_documentacion">
-                Secretaría General (Archivo y Documentación)
-              </option>
-              <option value="secretaria_general-atencion_al_ciudadano">
-                Secretaría General (Atención al Ciudadano)
-              </option>
-              <option value="secretaria_general-contratacion">
-                Secretaría General (Contratación)
-              </option>
-              <option value="seguridad_ciudadana">Seguridad Ciudadana</option>
-              <option value="seguridad_ciudadana-bomberos">
-                Seguridad Ciudadana (Bomberos)
-              </option>
-              <option value="seguridad_ciudadana-policia">
-                Seguridad Ciudadana (Policía)
-              </option>
-              <option value="seguridad_ciudadana-proteccion_civil">
-                Seguridad Ciudadana (Protección Civil)
-              </option>
-              <option value="servicios">Servicios</option>
-              <option value="servicios_sociales">Servicios Sociales</option>
-              <option value="servicios_sociales-familia">
-                Servicios Sociales (Familia)
-              </option>
-              <option value="servicios_sociales-igualdad">
-                Servicios Sociales (Igualdad)
-              </option>
-              <option value="servicios_sociales-menor">
-                Servicios Sociales (Menor)
-              </option>
-              <option value="servicios_sociales-mujer">
-                Servicios Sociales (Mujer)
-              </option>
-              <option value="servicios_sociales-tercera_edad">
-                Servicios Sociales (Tercera Edad)
-              </option>
-              <option value="turismo">Turismo</option>
-              <option value="urbanismo">Urbanismo</option>
-              <option value="urbanismo-alumbrado_publico">
-                Urbanismo (Alumbrado Público)
-              </option>
-              <option value="urbanismo-aru_santa_catalina">
-                Urbanismo (ARU Santa Catalina)
-              </option>
-              <option value="urbanismo-cementerio">
-                Urbanismo (Cementerio)
-              </option>
-              <option value="urbanismo-vias_publicas">
-                Urbanismo (Vías Públicas)
-              </option>
             </select>
           </div>
 
@@ -467,7 +331,7 @@
               La firma aparecerá aquí...
             </p>
           </div>
-          <button class="btn copy-btn" onclick="copyPreviewToClipboard()">
+          <button class="btn btn--copy" onclick="copyPreviewToClipboard()">
             📋 Copiar vista previa (con formato)
           </button>
 
@@ -478,13 +342,14 @@
             readonly
             placeholder="El código HTML aparecerá aquí..."
           ></textarea>
-          <button class="btn copy-btn" onclick="copyToClipboard()">
+          <button class="btn btn--copy" onclick="copyToClipboard()">
             📋 Copiar código HTML
           </button>
         </div>
       </div>
+
       <div class="footer">
-        <p style="margin-bottom: 10px">
+        <p>
           Copyleft 2025 Ayuntamiento de Aranda de Duero |
           <a
             href="https://www.arandadeduero.es"
@@ -493,7 +358,7 @@
             >www.arandadeduero.es</a
           >
         </p>
-        <p style="font-size: 0.8rem; line-height: 1.4">
+        <p>
           Este proyecto está bajo licencia <strong>CC BY-SA 4.0</strong>. Eres
           libre de usar, copiar, modificar y distribuir este software. Si lo
           adaptas, debes compartirlo bajo la misma licencia.
@@ -508,376 +373,281 @@
     </div>
 
     <script>
-      // Image mapping for each concejalía
-      const concejaliaImages = {
-        aguas: "images/blanco/aguas.png",
-        "aguas-abastecimiento": "images/blanco/aguas-abastecimiento.png",
-        "aguas-alcantarillado": "images/blanco/aguas-alcantarillado.png",
-        alcaldia: "images/colores/ayuntamiento.png",
-        barrios: "images/blanco/barrios.png",
-        comercio_y_consumo: "images/blanco/comercio_y_consumo.png",
-        comunicacion: "images/blanco/comunicacion.png",
-        contratacion: "images/blanco/contratacion.png",
-        cultura: "images/blanco/cultura.png",
-        "cultura-biblioteca": "images/blanco/cultura-biblioteca.png",
-        "cultura-centros_civicos": "images/blanco/cultura-centros_civicos.png",
-        "cultura-cultura_general": "images/blanco/cultura-cultura_general.png",
-        "cultura-promocion_cultural":
-          "images/blanco/cultura-promocion_cultural.png",
-        deportes: "images/blanco/deportes.png",
-        "deportes-instalaciones_deportivas":
-          "images/blanco/deportes-instalaciones_deportivas.png",
-        "deportes-promocion_deportiva":
-          "images/blanco/deportes-promocion_deportiva.png",
-        educacion: "images/blanco/educacion.png",
-        "educacion-escuela_de_musica":
-          "images/blanco/educacion-escuela_de_musica.png",
-        festejos: "images/blanco/festejos.png",
-        hacienda: "images/blanco/hacienda.png",
-        hermanamientos: "images/blanco/hermanamientos.png",
-        "hacienda-intervencion-contabilidad_y_gestion":
-          "images/blanco/hacienda-intervencion-contabilidad_y_gestion.png",
-        "hacienda-intervencion-fiscalizacion_y_control":
-          "images/blanco/hacienda-intervencion-fiscalizacion_y_control.png",
-        "hacienda-tesoreria": "images/blanco/hacienda-tesoreria.png",
-        "hacienda-tesoreria-direccion_financiera":
-          "images/blanco/hacienda-tesoreria-direccion_financiera.png",
-        "hacienda-tesoreria-gestion_tributaria":
-          "images/blanco/hacienda-tesoreria-gestion_tributaria.png",
-        "hacienda-tesoreria-inspeccion":
-          "images/blanco/hacienda-tesoreria-inspeccion.png",
-        "hacienda-tesoreria-recaudacion":
-          "images/blanco/hacienda-tesoreria-recaudacion.png",
-        informatica: "images/blanco/informatica.png",
-        innovacion: "images/blanco/innovacion.png",
-        juventud: "images/blanco/juventud.png",
-        "juventud-centro_de_arte_joven":
-          "images/blanco/juventud-centro_de_arte_joven.png",
-        "juventud-escuela_de_folklore":
-          "images/blanco/juventud-escuela_de_folklore.png",
-        medio_ambiente: "images/blanco/medio_ambiente.png",
-        "medio_ambiente-aseo_urbano":
-          "images/blanco/medio_ambiente-aseo_urbano.png",
-        "medio_ambiente-limpieza_viaria":
-          "images/blanco/medio_ambiente-limpieza_viaria.png",
-        "medio_ambiente-parques_y_jardines":
-          "images/blanco/medio_ambiente-parques_y_jardines.png",
-        "medio_ambiente-recogida_de_residuos":
-          "images/blanco/medio_ambiente-recogida_de_residuos.png",
-        movilidad: "images/blanco/movilidad.png",
-        participacion_ciudadana: "images/blanco/participacion_ciudadana.png",
-        personal: "images/blanco/personal.png",
-        promocion: "images/blanco/promocion.png",
-        regimen_interior: "images/blanco/regimen_interior.png",
-        secretaria_general: "images/blanco/secretaria_general.png",
-        "secretaria_general-archivo_y_documentacion":
-          "images/blanco/secretaria_general-archivo_y_documentacion.png",
-        "secretaria_general-atencion_al_ciudadano":
-          "images/blanco/secretaria_general-atencion_al_ciudadano.png",
-        "secretaria_general-contratacion":
-          "images/blanco/secretaria_general-contratacion.png",
-        seguridad_ciudadana: "images/blanco/seguridad_ciudadana.png",
-        "seguridad_ciudadana-bomberos":
-          "images/blanco/seguridad_ciudadana-bomberos.png",
-        "seguridad_ciudadana-policia":
-          "images/blanco/seguridad_ciudadana-policia.png",
-        "seguridad_ciudadana-proteccion_civil":
-          "images/blanco/seguridad_ciudadana-proteccion_civil.png",
-        servicios: "images/blanco/servicios.png",
-        servicios_sociales: "images/blanco/servicios_sociales.png",
-        "servicios_sociales-familia":
-          "images/blanco/servicios_sociales-familia.png",
-        "servicios_sociales-igualdad":
-          "images/blanco/servicios_sociales-igualdad.png",
-        "servicios_sociales-menor":
-          "images/blanco/servicios_sociales-menor.png",
-        "servicios_sociales-mujer":
-          "images/blanco/servicios_sociales-mujer.png",
-        "servicios_sociales-tercera_edad":
-          "images/blanco/servicios_sociales-tercera_edad.png",
-        turismo: "images/blanco/turismo.png",
-        urbanismo: "images/blanco/urbanismo.png",
-        "urbanismo-alumbrado_publico":
-          "images/blanco/urbanismo-alumbrado_publico.png",
-        "urbanismo-aru_santa_catalina":
-          "images/blanco/urbanismo-aru_santa_catalina.png",
-        "urbanismo-cementerio": "images/blanco/urbanismo-cementerio.png",
-        "urbanismo-vias_publicas": "images/blanco/urbanismo-vias_publicas.png",
-      };
+      // ─────────────────────────────────────────────────────────────────────────
+      // Data: single source of truth for every concejalía.
+      // Each entry: [key, displayName, imagePath]
+      // ─────────────────────────────────────────────────────────────────────────
+      const CONCEJALIAS = [
+        ["aguas",                                          "Aguas",                                                         "images/blanco/aguas.png"],
+        ["aguas-abastecimiento",                           "Aguas (Abastecimiento)",                                        "images/blanco/aguas-abastecimiento.png"],
+        ["aguas-alcantarillado",                           "Aguas (Alcantarillado)",                                        "images/blanco/aguas-alcantarillado.png"],
+        ["alcaldia",                                       "Alcaldía + Concejales",                                         "images/colores/ayuntamiento.png"],
+        ["barrios",                                        "Barrios",                                                       "images/blanco/barrios.png"],
+        ["comercio_y_consumo",                             "Comercio y Consumo",                                            "images/blanco/comercio_y_consumo.png"],
+        ["comunicacion",                                   "Comunicación",                                                  "images/blanco/comunicacion.png"],
+        ["contratacion",                                   "Contratación",                                                  "images/blanco/contratacion.png"],
+        ["cultura",                                        "Cultura",                                                       "images/blanco/cultura.png"],
+        ["cultura-biblioteca",                             "Cultura (Biblioteca)",                                          "images/blanco/cultura-biblioteca.png"],
+        ["cultura-centros_civicos",                        "Cultura (Centros Cívicos)",                                     "images/blanco/cultura-centros_civicos.png"],
+        ["cultura-cultura_general",                        "Cultura (Cultura General)",                                     "images/blanco/cultura-cultura_general.png"],
+        ["cultura-promocion_cultural",                     "Cultura (Promoción Cultural)",                                  "images/blanco/cultura-promocion_cultural.png"],
+        ["deportes",                                       "Deportes",                                                      "images/blanco/deportes.png"],
+        ["deportes-instalaciones_deportivas",              "Deportes (Instalaciones Deportivas)",                           "images/blanco/deportes-instalaciones_deportivas.png"],
+        ["deportes-promocion_deportiva",                   "Deportes (Promoción Deportiva)",                                "images/blanco/deportes-promocion_deportiva.png"],
+        ["educacion",                                      "Educación",                                                     "images/blanco/educacion.png"],
+        ["educacion-escuela_de_musica",                    "Educación (Escuela de Música)",                                 "images/blanco/educacion-escuela_de_musica.png"],
+        ["festejos",                                       "Festejos",                                                      "images/blanco/festejos.png"],
+        ["hacienda",                                       "Hacienda",                                                      "images/blanco/hacienda.png"],
+        ["hacienda-intervencion-contabilidad_y_gestion",   "Hacienda - Intervención (Contabilidad y Gestión)",              "images/blanco/hacienda-intervencion-contabilidad_y_gestion.png"],
+        ["hacienda-intervencion-fiscalizacion_y_control",  "Hacienda - Intervención (Fiscalización y Control)",             "images/blanco/hacienda-intervencion-fiscalizacion_y_control.png"],
+        ["hacienda-tesoreria",                             "Hacienda - Tesorería",                                         "images/blanco/hacienda-tesoreria.png"],
+        ["hacienda-tesoreria-direccion_financiera",        "Hacienda - Tesorería (Dirección Financiera)",                   "images/blanco/hacienda-tesoreria-direccion_financiera.png"],
+        ["hacienda-tesoreria-gestion_tributaria",          "Hacienda - Tesorería (Gestión Tributaria)",                    "images/blanco/hacienda-tesoreria-gestion_tributaria.png"],
+        ["hacienda-tesoreria-inspeccion",                  "Hacienda - Tesorería (Inspección)",                            "images/blanco/hacienda-tesoreria-inspeccion.png"],
+        ["hacienda-tesoreria-recaudacion",                 "Hacienda - Tesorería (Recaudación)",                           "images/blanco/hacienda-tesoreria-recaudacion.png"],
+        ["hermanamientos",                                 "Hermanamientos",                                                "images/blanco/hermanamientos.png"],
+        ["informatica",                                    "Informática",                                                   "images/blanco/informatica.png"],
+        ["innovacion",                                     "Innovación",                                                    "images/blanco/innovacion.png"],
+        ["intervencion",                                   "Intervención",                                                  "images/blanco/intervencion.png"],
+        ["juventud",                                       "Juventud",                                                      "images/blanco/juventud.png"],
+        ["juventud-centro_de_arte_joven",                  "Juventud (Centro de Arte Joven)",                               "images/blanco/juventud-centro_de_arte_joven.png"],
+        ["juventud-escuela_de_folklore",                   "Juventud (Escuela de Folklore)",                                "images/blanco/juventud-escuela_de_folklore.png"],
+        ["medio_ambiente",                                 "Medio Ambiente",                                                "images/blanco/medio_ambiente.png"],
+        ["medio_ambiente-aseo_urbano",                     "Medio Ambiente (Aseo Urbano)",                                  "images/blanco/medio_ambiente-aseo_urbano.png"],
+        ["medio_ambiente-limpieza_viaria",                 "Medio Ambiente (Limpieza Viaria)",                              "images/blanco/medio_ambiente-limpieza_viaria.png"],
+        ["medio_ambiente-parques_y_jardines",              "Medio Ambiente (Parques y Jardines)",                           "images/blanco/medio_ambiente-parques_y_jardines.png"],
+        ["medio_ambiente-recogida_de_residuos",            "Medio Ambiente (Recogida de Residuos)",                         "images/blanco/medio_ambiente-recogida_de_residuos.png"],
+        ["movilidad",                                      "Movilidad",                                                     "images/blanco/movilidad.png"],
+        ["participacion_ciudadana",                        "Participación Ciudadana",                                       "images/blanco/participacion_ciudadana.png"],
+        ["personal",                                       "Personal",                                                      "images/blanco/personal.png"],
+        ["promocion",                                      "Promoción",                                                     "images/blanco/promocion.png"],
+        ["regimen_interior",                               "Régimen Interior",                                              "images/blanco/regimen_interior.png"],
+        ["secretaria_general",                             "Secretaría General",                                            "images/blanco/secretaria_general.png"],
+        ["secretaria_general-archivo_y_documentacion",     "Secretaría General (Archivo y Documentación)",                  "images/blanco/secretaria_general-archivo_y_documentacion.png"],
+        ["secretaria_general-atencion_al_ciudadano",       "Secretaría General (Atención al Ciudadano)",                    "images/blanco/secretaria_general-atencion_al_ciudadano.png"],
+        ["secretaria_general-contratacion",                "Secretaría General (Contratación)",                             "images/blanco/secretaria_general-contratacion.png"],
+        ["seguridad_ciudadana",                            "Seguridad Ciudadana",                                           "images/blanco/seguridad_ciudadana.png"],
+        ["seguridad_ciudadana-bomberos",                   "Seguridad Ciudadana (Bomberos)",                                "images/blanco/seguridad_ciudadana-bomberos.png"],
+        ["seguridad_ciudadana-policia",                    "Seguridad Ciudadana (Policía)",                                 "images/blanco/seguridad_ciudadana-policia.png"],
+        ["seguridad_ciudadana-proteccion_civil",           "Seguridad Ciudadana (Protección Civil)",                        "images/blanco/seguridad_ciudadana-proteccion_civil.png"],
+        ["servicios",                                      "Servicios",                                                     "images/blanco/servicios.png"],
+        ["servicios_sociales",                             "Servicios Sociales",                                            "images/blanco/servicios_sociales.png"],
+        ["servicios_sociales-familia",                     "Servicios Sociales (Familia)",                                  "images/blanco/servicios_sociales-familia.png"],
+        ["servicios_sociales-igualdad",                    "Servicios Sociales (Igualdad)",                                 "images/blanco/servicios_sociales-igualdad.png"],
+        ["servicios_sociales-menor",                       "Servicios Sociales (Menor)",                                    "images/blanco/servicios_sociales-menor.png"],
+        ["servicios_sociales-mujer",                       "Servicios Sociales (Mujer)",                                    "images/blanco/servicios_sociales-mujer.png"],
+        ["servicios_sociales-tercera_edad",                "Servicios Sociales (Tercera Edad)",                             "images/blanco/servicios_sociales-tercera_edad.png"],
+        ["turismo",                                        "Turismo",                                                       "images/blanco/turismo.png"],
+        ["urbanismo",                                      "Urbanismo",                                                     "images/blanco/urbanismo.png"],
+        ["urbanismo-alumbrado_publico",                    "Urbanismo (Alumbrado Público)",                                 "images/blanco/urbanismo-alumbrado_publico.png"],
+        ["urbanismo-aru_santa_catalina",                   "Urbanismo (ARU Santa Catalina)",                                "images/blanco/urbanismo-aru_santa_catalina.png"],
+        ["urbanismo-cementerio",                           "Urbanismo (Cementerio)",                                        "images/blanco/urbanismo-cementerio.png"],
+        ["urbanismo-vias_publicas",                        "Urbanismo (Vías Públicas)",                                     "images/blanco/urbanismo-vias_publicas.png"],
+      ];
 
-      // Display names for concejalías
-      const concejaliaNames = {
-        aguas: "Aguas",
-        "aguas-abastecimiento": "Aguas (Abastecimiento)",
-        "aguas-alcantarillado": "Aguas (Alcantarillado)",
-        alcaldia: "Alcaldía + Concejales",
-        barrios: "Barrios",
-        comercio_y_consumo: "Comercio y Consumo",
-        comunicacion: "Comunicación",
-        contratacion: "Contratación",
-        cultura: "Cultura",
-        "cultura-biblioteca": "Cultura (Biblioteca)",
-        "cultura-centros_civicos": "Cultura (Centros Cívicos)",
-        "cultura-cultura_general": "Cultura (Cultura General)",
-        "cultura-promocion_cultural": "Cultura (Promoción Cultural)",
-        deportes: "Deportes",
-        "deportes-instalaciones_deportivas":
-          "Deportes (Instalaciones Deportivas)",
-        "deportes-promocion_deportiva": "Deportes (Promoción Deportiva)",
-        educacion: "Educación",
-        "educacion-escuela_de_musica": "Educación (Escuela de Música)",
-        festejos: "Festejos",
-        hacienda: "Hacienda",
-        "hacienda-intervencion-contabilidad_y_gestion":
-          "Hacienda - Intervención (Contabilidad y Gestión)",
-        "hacienda-intervencion-fiscalizacion_y_control":
-          "Hacienda - Intervención (Fiscalización y Control)",
-        "hacienda-tesoreria": "Hacienda - Tesorería",
-        "hacienda-tesoreria-direccion_financiera":
-          "Hacienda - Tesorería (Dirección Financiera)",
-        "hacienda-tesoreria-gestion_tributaria":
-          "Hacienda - Tesorería (Gestión Tributaria)",
-        "hacienda-tesoreria-inspeccion": "Hacienda - Tesorería (Inspección)",
-        "hacienda-tesoreria-recaudacion": "Hacienda - Tesorería (Recaudación)",
-        hermanamientos: "Hermanamientos",
-        informatica: "Informática",
-        innovacion: "Innovación",
-        juventud: "Juventud",
-        "juventud-centro_de_arte_joven": "Juventud (Centro de Arte Joven)",
-        "juventud-escuela_de_folklore": "Juventud (Escuela de Folklore)",
-        medio_ambiente: "Medio Ambiente",
-        "medio_ambiente-aseo_urbano": "Medio Ambiente (Aseo Urbano)",
-        "medio_ambiente-limpieza_viaria": "Medio Ambiente (Limpieza Viaria)",
-        "medio_ambiente-parques_y_jardines":
-          "Medio Ambiente (Parques y Jardines)",
-        "medio_ambiente-recogida_de_residuos":
-          "Medio Ambiente (Recogida de Residuos)",
-        movilidad: "Movilidad",
-        participacion_ciudadana: "Participación Ciudadana",
-        personal: "Personal",
-        promocion: "Promoción",
-        regimen_interior: "Régimen Interior",
-        secretaria_general: "Secretaría General",
-        "secretaria_general-archivo_y_documentacion":
-          "Secretaría General (Archivo y Documentación)",
-        "secretaria_general-atencion_al_ciudadano":
-          "Secretaría General (Atención al Ciudadano)",
-        "secretaria_general-contratacion": "Secretaría General (Contratación)",
-        seguridad_ciudadana: "Seguridad Ciudadana",
-        "seguridad_ciudadana-bomberos": "Seguridad Ciudadana (Bomberos)",
-        "seguridad_ciudadana-policia": "Seguridad Ciudadana (Policía)",
-        "seguridad_ciudadana-proteccion_civil":
-          "Seguridad Ciudadana (Protección Civil)",
-        servicios: "Servicios",
-        servicios_sociales: "Servicios Sociales",
-        "servicios_sociales-familia": "Servicios Sociales (Familia)",
-        "servicios_sociales-igualdad": "Servicios Sociales (Igualdad)",
-        "servicios_sociales-menor": "Servicios Sociales (Menor)",
-        "servicios_sociales-mujer": "Servicios Sociales (Mujer)",
-        "servicios_sociales-tercera_edad": "Servicios Sociales (Tercera Edad)",
-        turismo: "Turismo",
-        urbanismo: "Urbanismo",
-        "urbanismo-alumbrado_publico": "Urbanismo (Alumbrado Público)",
-        "urbanismo-aru_santa_catalina": "Urbanismo (ARU Santa Catalina)",
-        "urbanismo-cementerio": "Urbanismo (Cementerio)",
-        "urbanismo-vias_publicas": "Urbanismo (Vías Públicas)",
-      };
+      // Lookup maps derived from the single data source above
+      const concejaliaNames  = Object.fromEntries(CONCEJALIAS.map(([k, name])  => [k, name]));
+      const concejaliaImages = Object.fromEntries(CONCEJALIAS.map(([k, , img]) => [k, img]));
+
+      // ─────────────────────────────────────────────────────────────────────────
+      // Populate <select> dynamically so the HTML stays lean
+      // ─────────────────────────────────────────────────────────────────────────
+      function populateSelect() {
+        const select = document.getElementById("concejalia");
+        CONCEJALIAS.forEach(([key, name]) => {
+          const opt = document.createElement("option");
+          opt.value = key;
+          opt.textContent = name;
+          select.appendChild(opt);
+        });
+      }
+
+      // ─────────────────────────────────────────────────────────────────────────
+      // Signature generation
+      // ─────────────────────────────────────────────────────────────────────────
+      const BASE_URL = "https://arandadeduero.github.io/firmas-correo/";
 
       function generateSignature() {
-        const name = document.getElementById("name").value.trim();
-        const position = document.getElementById("position").value.trim();
+        const name         = document.getElementById("name").value.trim();
+        const position     = document.getElementById("position").value.trim();
         const concejaliaKey = document.getElementById("concejalia").value;
-        const email = document.getElementById("email").value.trim();
-        const phone = document.getElementById("phone").value.trim();
+        const email        = document.getElementById("email").value.trim();
+        const phone        = document.getElementById("phone").value.trim();
 
-        // If not all required fields are filled, show placeholder
+        const preview  = document.getElementById("preview");
+        const codeArea = document.getElementById("htmlCode");
+
         if (!name || !position || !concejaliaKey || !email) {
-          document.getElementById("preview").innerHTML =
-            `<p style="color: #999; text-align: center">La firma aparecerá aquí cuando completes todos los campos obligatorios...</p>`;
-          document.getElementById("htmlCode").value = "";
+          preview.innerHTML = `<p style="color:#999;text-align:center">La firma aparecerá aquí cuando completes todos los campos obligatorios...</p>`;
+          codeArea.value = "";
           return;
         }
 
-        // Check email format
         if (!email.endsWith("@arandadeduero.es")) {
-          document.getElementById("preview").innerHTML =
-            `<p style="color: #ce0e2d; text-align: center">⚠️ El correo electrónico debe terminar en @arandadeduero.es</p>`;
-          document.getElementById("htmlCode").value = "";
+          preview.innerHTML = `<p style="color:#ce0e2d;text-align:center">&#9888;&#65039; El correo electrónico debe terminar en @arandadeduero.es</p>`;
+          codeArea.value = "";
           return;
         }
 
         const concejaliaName = `Concejalía de ${concejaliaNames[concejaliaKey]}`;
-        const imageUrl = concejaliaImages[concejaliaKey];
+        const imageUrl       = concejaliaImages[concejaliaKey];
 
-        // Check if position starts with "Alcald" or "Concejal" to hide concejalía line
+        // Hide the concejalía line for alcaldes / concejales
         const showConcejalia =
           !position.startsWith("Alcald") &&
           !position.startsWith("Concejal") &&
           concejaliaKey !== "alcaldia";
 
-        // Generate HTML signature
-        const signatureHTML = `
-<div>--&nbsp;</div>
-<table style="font-family: 'Outfit', sans-serif; font-size: 14px; color: #333; border-collapse: collapse;">
-    <tr>
-        <td style="padding: 10px; padding-left: 0; vertical-align: top;">
-            <div style="line-height: 1.6;">
-                <div style="font-weight: bold; font-size: 16px; color: #000000; margin-bottom: 2px;">${name}</div>
-                <div style="color: #000000; font-size: 13px; margin-bottom: 2px;">${position}</div>
-                ${
-                  showConcejalia
-                    ? `<div style="color: #000000; font-weight: 600; font-size: 13px; margin-bottom: 8px;">${concejaliaName}</div>`
-                    : ""
-                }
-                <div style="color: #000000; font-size: 13px;">
-                    📧 <a href="mailto:${email}" style="color: #000000; text-decoration: none;">${email}</a>
-                </div>
-                ${
-                  phone
-                    ? `<div style="color: #000000; font-size: 13px;">📱 ${phone}</div>`
-                    : ""
-                }
-                <div style="color: #666666; font-size: 11px; margin-top: 8px;">
-                  <a href="https://www.arandadeduero.es/aviso-legal/" style="color: #666666; text-decoration: none;" target="_blank">Aviso legal</a> · Si no es necesario y te preocupa el medio ambiente, no imprimas este correo electrónico.
-                </div>
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td style="padding: 10px; padding-left: 0; padding-top: 15px;">
-            <img src="https://arandadeduero.github.io/firmas-correo/${imageUrl}" alt="${concejaliaName}" style="display: block; max-width: 320px; height: auto; border-radius: 8px;">
-        </td>
-    </tr>
-</table>`.trim();
+        const signatureHTML = buildSignatureHTML({
+          name, position, concejaliaName, showConcejalia, email, phone, imageUrl,
+        });
 
-        // Update preview
-        document.getElementById("preview").innerHTML = signatureHTML;
-
-        // Update code textarea
-        document.getElementById("htmlCode").value = signatureHTML;
+        preview.innerHTML = signatureHTML;
+        codeArea.value    = signatureHTML;
       }
 
-      function copyToClipboard() {
-        const codeTextarea = document.getElementById("htmlCode");
+      function buildSignatureHTML({ name, position, concejaliaName, showConcejalia, email, phone, imageUrl }) {
+        const concejalia = showConcejalia
+          ? `<div style="color:#000000;font-weight:600;font-size:13px;margin-bottom:8px;">${concejaliaName}</div>`
+          : "";
 
-        if (!codeTextarea.value) {
+        const phoneRow = phone
+          ? `<div style="color:#000000;font-size:13px;">📱 ${phone}</div>`
+          : "";
+
+        return `
+<div>--&nbsp;</div>
+<table style="font-family:'Outfit',sans-serif;font-size:14px;color:#333;border-collapse:collapse;">
+  <tr>
+    <td style="padding:10px;padding-left:0;vertical-align:top;">
+      <div style="line-height:1.6;">
+        <div style="font-weight:bold;font-size:16px;color:#000000;margin-bottom:2px;">${name}</div>
+        <div style="color:#000000;font-size:13px;margin-bottom:2px;">${position}</div>
+        ${concejalia}
+        <div style="color:#000000;font-size:13px;">
+          📧 <a href="mailto:${email}" style="color:#000000;text-decoration:none;">${email}</a>
+        </div>
+        ${phoneRow}
+        <div style="color:#666666;font-size:11px;margin-top:8px;">
+          <a href="https://www.arandadeduero.es/aviso-legal/" style="color:#666666;text-decoration:none;" target="_blank">Aviso legal</a> · Si no es necesario y te preocupa el medio ambiente, no imprimas este correo electrónico.
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:10px;padding-left:0;padding-top:15px;">
+      <img src="${BASE_URL}${imageUrl}" alt="${concejaliaName}" style="display:block;max-width:320px;height:auto;border-radius:8px;">
+    </td>
+  </tr>
+</table>`.trim();
+      }
+
+      // ─────────────────────────────────────────────────────────────────────────
+      // Clipboard helpers
+      // ─────────────────────────────────────────────────────────────────────────
+      function flashButton(btn) {
+        const original = btn.textContent;
+        btn.textContent = "✓ ¡Copiado!";
+        btn.style.background = "#059669";
+        setTimeout(() => {
+          btn.textContent = original;
+          btn.style.background = "";
+        }, 2000);
+      }
+
+      async function copyToClipboard() {
+        const code = document.getElementById("htmlCode").value;
+        if (!code) {
           alert("Primero genera una firma antes de copiar el código.");
           return;
         }
-
-        codeTextarea.select();
-        codeTextarea.setSelectionRange(0, 99999); // For mobile devices
-
         try {
-          document.execCommand("copy");
-
-          // Change button text temporarily
-          const btn = event.target;
-          const originalText = btn.textContent;
-          btn.textContent = "✓ ¡Copiado!";
-          btn.style.background = "#059669";
-
-          setTimeout(() => {
-            btn.textContent = originalText;
-            btn.style.background = "";
-          }, 2000);
-        } catch (err) {
+          await navigator.clipboard.writeText(code);
+          flashButton(event.target);
+        } catch {
           alert("Error al copiar. Por favor, copia manualmente el texto.");
         }
       }
 
-      function copyPreviewToClipboard() {
+      async function copyPreviewToClipboard() {
         const previewBox = document.getElementById("preview");
-
-        if (
-          !previewBox.innerHTML ||
-          previewBox.innerHTML.includes("La firma aparecerá")
-        ) {
+        if (!previewBox.innerHTML || previewBox.innerHTML.includes("La firma aparecerá")) {
           alert("Primero genera una firma antes de copiar.");
           return;
         }
 
         try {
-          const range = document.createRange();
-          range.selectNodeContents(previewBox);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand("copy");
-          selection.removeAllRanges();
-
-          // Change button text temporarily
-          const btn = event.target;
-          const originalText = btn.textContent;
-          btn.textContent = "✓ ¡Copiado!";
-          btn.style.background = "#059669";
-
-          setTimeout(() => {
-            btn.textContent = originalText;
-            btn.style.background = "";
-          }, 2000);
-        } catch (err) {
-          alert(
-            "Error al copiar. Por favor, copia manualmente desde la vista previa.",
-          );
-        }
-      }
-
-      // Save form data to localStorage
-      function saveFormData() {
-        const formData = {
-          name: document.getElementById("name").value,
-          position: document.getElementById("position").value,
-          concejalia: document.getElementById("concejalia").value,
-          email: document.getElementById("email").value,
-          phone: document.getElementById("phone").value,
-        };
-        localStorage.setItem("firmaCorreoData", JSON.stringify(formData));
-      }
-
-      // Load form data from localStorage
-      function loadFormData() {
-        const savedData = localStorage.getItem("firmaCorreoData");
-        if (savedData) {
+          const blob = new Blob([previewBox.innerHTML], { type: "text/html" });
+          const item = new ClipboardItem({ "text/html": blob });
+          await navigator.clipboard.write([item]);
+          flashButton(event.target);
+        } catch {
+          // Fallback: select the rendered content
           try {
-            const formData = JSON.parse(savedData);
-            document.getElementById("name").value = formData.name || "";
-            document.getElementById("position").value = formData.position || "";
-            document.getElementById("concejalia").value =
-              formData.concejalia || "";
-            document.getElementById("email").value = formData.email || "";
-            document.getElementById("phone").value = formData.phone || "";
-
-            // Generate signature with loaded data
-            generateSignature();
-          } catch (e) {
-            console.error("Error loading saved form data:", e);
+            const range = document.createRange();
+            range.selectNodeContents(previewBox);
+            const sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            document.execCommand("copy");
+            sel.removeAllRanges();
+            flashButton(event.target);
+          } catch {
+            alert("Error al copiar. Por favor, copia manualmente desde la vista previa.");
           }
         }
       }
 
-      // Generate signature on Enter key and on any input change (live preview)
-      document.querySelectorAll("input, select").forEach((element) => {
-        // Live preview on input/change
-        element.addEventListener("input", function () {
-          saveFormData();
-          generateSignature();
-        });
-        element.addEventListener("change", function () {
-          saveFormData();
-          generateSignature();
-        });
+      // ─────────────────────────────────────────────────────────────────────────
+      // Persistence (localStorage)
+      // ─────────────────────────────────────────────────────────────────────────
+      const STORAGE_KEY = "firmaCorreoData";
+      const FIELDS = ["name", "position", "concejalia", "email", "phone"];
 
-        // Also on Enter key
-        element.addEventListener("keypress", function (e) {
-          if (e.key === "Enter") {
-            generateSignature();
-          }
+      function saveFormData() {
+        const data = Object.fromEntries(
+          FIELDS.map((id) => [id, document.getElementById(id).value])
+        );
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      }
+
+      function loadFormData() {
+        try {
+          const saved = localStorage.getItem(STORAGE_KEY);
+          if (!saved) return;
+          const data = JSON.parse(saved);
+          FIELDS.forEach((id) => {
+            if (data[id]) document.getElementById(id).value = data[id];
+          });
+          generateSignature();
+        } catch (e) {
+          console.error("Error loading saved form data:", e);
+        }
+      }
+
+      // ─────────────────────────────────────────────────────────────────────────
+      // Event wiring
+      // ─────────────────────────────────────────────────────────────────────────
+      function onFieldChange() {
+        saveFormData();
+        generateSignature();
+      }
+
+      document.querySelectorAll("input, select").forEach((el) => {
+        el.addEventListener("input",  onFieldChange);
+        el.addEventListener("change", onFieldChange);
+        el.addEventListener("keypress", (e) => {
+          if (e.key === "Enter") generateSignature();
         });
       });
 
-      // Load saved form data when page loads
-      window.addEventListener("DOMContentLoaded", loadFormData);
+      // ─────────────────────────────────────────────────────────────────────────
+      // Init
+      // ─────────────────────────────────────────────────────────────────────────
+      window.addEventListener("DOMContentLoaded", () => {
+        populateSelect();
+        loadFormData();
+      });
     </script>
   </body>
 </html>
