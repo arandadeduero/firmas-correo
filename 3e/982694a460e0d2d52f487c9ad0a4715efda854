@@ -1,0 +1,21 @@
+index.html
+  s_e58c7b9a734871::t_687182260934a9 7
+README.md
+  s_e58c7b9a734871::t_687182260934a9 45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "3e982694a460e0d2d52f487c9ad0a4715efda854",
+  "prompts": {},
+  "sessions": {
+    "s_e58c7b9a734871": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a9b3ccaa-0c81-4bf0-86f9-234f48013bb4",
+        "model": "unknown"
+      },
+      "human_author": "Guillermo López <willyaranda@gmail.com>"
+    }
+  }
+}
