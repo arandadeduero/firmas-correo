@@ -42,6 +42,7 @@ Los datos se guardan en el navegador (`localStorage`) para no tener que volver a
 ```
 firmas-correo/
 ├── index.html      # Toda la aplicación: HTML, CSS y JavaScript
+├── favicon.png     # Icono de la pestaña (escudo del Ayuntamiento)
 ├── images/
 │   ├── blanco/     # Logo de cada concejalía (sobre fondo blanco)
 │   └── colores/    # Logo general del Ayuntamiento
