@@ -572,6 +572,26 @@
         }
       }
 
+      // Fields can also come in the URL (?name=…&position=…&concejalia=…&email=…&phone=…),
+      // which is how the Ayuntamiento's portal opens the generator with the
+      // person's details already in place. The URL wins over what was saved.
+      // The concejalía may be given by its key or by its name, in any case.
+      function loadUrlData() {
+        const params = new URLSearchParams(location.search);
+        const fold = (text) => text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+        for (const field of ["name", "position", "email", "phone"]) {
+          const value = params.get(field);
+          if (value) form.elements.namedItem(field).value = value.trim();
+        }
+        const concejalia = params.get("concejalia");
+        if (concejalia) {
+          const wanted = fold(concejalia);
+          const match = Object.entries(CONCEJALIAS).find(([key, name]) => key === concejalia || fold(name) === wanted || fold(name).includes(wanted));
+          if (match) form.elements.namedItem("concejalia").value = match[0];
+        }
+        if ([...params.keys()].length > 0) saveFormData();
+      }
+
       // ─────────────────────────────────────────────────────────────────────────
       // Event wiring + init
       // ─────────────────────────────────────────────────────────────────────────
@@ -591,6 +611,7 @@
         .namedItem("concejalia")
         .append(...Object.entries(CONCEJALIAS).map(([key, name]) => new Option(name, key)));
       loadFormData();
+      loadUrlData();
       render();
     </script>
   </body>

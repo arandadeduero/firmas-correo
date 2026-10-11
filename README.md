@@ -19,6 +19,16 @@ Herramienta web para que el personal del Ayuntamiento de Aranda de Duero genere 
 
 Los datos se guardan en el navegador (`localStorage`) para no tener que volver a escribirlos; no se envían a ningún servidor.
 
+### Abrirlo con los datos ya puestos
+
+Los campos se pueden pasar en la dirección, y así lo hace el portal *Mi Microsoft 365* para abrir el generador con los datos del perfil de cada persona:
+
+```
+https://arandadeduero.github.io/firmas-correo/?name=Ana%20García&position=Técnica&concejalia=Urbanismo&email=ana@arandadeduero.es&phone=947%20500%20100
+```
+
+`concejalia` admite la clave del desplegable o el nombre (sin distinguir mayúsculas ni acentos). Lo que llega por la dirección manda sobre lo guardado en el navegador.
+
 ### Dónde pegarla
 
 - **Gmail**: Ajustes → General → Firma → pegar la vista previa
